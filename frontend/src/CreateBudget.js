@@ -13,7 +13,7 @@ const CreateBudgetComponent = () => {
   useEffect(() => {
     const fetchBudgetData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/show-budget?user_id=${user_id}`);
+        const response = await axios.get(`http://64.176.215.213:8081/show-budget?user_id=${user_id}`);
         setBudgets(response.data);
       } catch (error) {
         console.error('Error fetching budget data:', error.message);
@@ -82,7 +82,7 @@ const CreateBudgetComponent = () => {
     }
 
     try {
-        const response = await axios.post('http://localhost:8081/create-budget', {
+        const response = await axios.post('http://64.176.215.213:8081/create-budget', {
           budgetCategory,
           amount,
           user_id,

@@ -1,6 +1,6 @@
 describe('Login Test', () => {
   beforeEach(() => {
-      cy.visit('http://localhost:3000') 
+      cy.visit('http://64.176.215.213:3000') 
   })
 
   it('greets with Login Here', () => {
@@ -32,7 +32,7 @@ describe('Login Test', () => {
     cy.get('[name=password]').type('Si123456{enter}');
     cy.get('form').contains('Log In').click()
 
-    cy.url({ timeout: 10000 }).should('eq', 'http://localhost:3000/home');
+    cy.url({ timeout: 10000 }).should('eq', 'http://64.176.215.213:3000/home');
     
     
   });

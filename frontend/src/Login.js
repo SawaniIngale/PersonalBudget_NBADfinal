@@ -18,7 +18,7 @@ function Login({onLogin}){
         event.preventDefault();
         setErrors(validation(values));
         if(errors.email === "" && errors.password === ""){
-            axios.post('http://localhost:8081/login', values)
+            axios.post('http://64.176.215.213:8081/login', values)
             .then(res =>{
                 if(res.data.status === "success"){
                     const uid = res.data.uid;

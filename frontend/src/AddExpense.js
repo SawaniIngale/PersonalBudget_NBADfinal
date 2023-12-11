@@ -14,7 +14,7 @@ const CreateExpenseComponent = () => {
   useEffect(() => {
     const fetchBudgetCategories = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/show-budget?user_id=${user_id}`);
+        const response = await axios.get(`http://64.176.215.213:8081/show-budget?user_id=${user_id}`);
         setBudgetCategories(response.data);
         if (response.data.length > 0) {
           setSelectedCategory(response.data[0].budget_category);
@@ -68,10 +68,10 @@ const CreateExpenseComponent = () => {
     }
 
     try {
-        const response = await axios.get(`http://localhost:8081/get-budget-id?category=${selectedCategory}&user_id=${user_id}`);
+        const response = await axios.get(`http://64.176.215.213:8081/get-budget-id?category=${selectedCategory}&user_id=${user_id}`);
         const budget_id = response.data.id;
         const budgetid = response.data.id;
-      await axios.post('http://localhost:8081/add-expense', {
+      await axios.post('http://64.176.215.213:8081/add-expense', {
         expense_category: selectedCategory,
         amount,
         budget_id,

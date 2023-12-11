@@ -54,9 +54,9 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const budgetResponse = await axios.get(`http://localhost:8081/category-wise-budget?user_id=${user_id}`);
-        const expenseResponse = await axios.get(`http://localhost:8081/category-wise-expense?user_id=${user_id}`);
-        const totalResponse = await axios.get(`http://localhost:8081/total-budget-expense?user_id=${user_id}`);
+        const budgetResponse = await axios.get(`http://64.176.215.213:8081/category-wise-budget?user_id=${user_id}`);
+        const expenseResponse = await axios.get(`http://64.176.215.213:8081/category-wise-expense?user_id=${user_id}`);
+        const totalResponse = await axios.get(`http://64.176.215.213:8081/total-budget-expense?user_id=${user_id}`);
 
         setCategoryWiseBudget(budgetResponse.data);
         setCategoryWiseExpense(expenseResponse.data);
@@ -72,7 +72,7 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8081/category-wise-data");
+        const response = await axios.get("http://64.176.215.213:8081/category-wise-data");
         setCategoryWiseData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error.message);
