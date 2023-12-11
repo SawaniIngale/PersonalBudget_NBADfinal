@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import NavBar from './Navbar';
 
 
 const CreateExpenseComponent = () => {
@@ -13,7 +12,6 @@ const CreateExpenseComponent = () => {
   const user_id = localStorage.getItem('user_id');
 
   useEffect(() => {
-    // Fetch budget categories from the server
     const fetchBudgetCategories = async () => {
       try {
         const response = await axios.get(`http://localhost:8081/show-budget?user_id=${user_id}`);
@@ -27,7 +25,7 @@ const CreateExpenseComponent = () => {
     };
 
     fetchBudgetCategories();
-  }, []); // Run once on component mount
+  }, []); 
 
   const containerStyle = {
     display: 'flex',
@@ -64,7 +62,6 @@ const CreateExpenseComponent = () => {
   };
 
   const handleAddExpense = async () => {
-    // Validate input
     if (!selectedCategory || isNaN(amount) || amount <= 0) {
       alert('Please enter valid information.');
       return;
@@ -74,9 +71,7 @@ const CreateExpenseComponent = () => {
         const response = await axios.get(`http://localhost:8081/get-budget-id?category=${selectedCategory}&user_id=${user_id}`);
         const budget_id = response.data.id;
         const budgetid = response.data.id;
-      // Make a POST request to add the expense
       await axios.post('http://localhost:8081/add-expense', {
-        // user_id: 1, // Assuming you have a user ID for the current user
         expense_category: selectedCategory,
         amount,
         budget_id,
@@ -84,11 +79,10 @@ const CreateExpenseComponent = () => {
         budgetid,
       });
 
-      // Clear form fields
+      
       setAmount('');
       alert('Expense added successfully!');
     } catch (error) {
-      // Handle errors, e.g., show an error message to the user
       console.error('Error adding expense:', error.message);
     }
   };

@@ -9,10 +9,8 @@ app.use(compression({
     threshold: 0, // compress responses of all sizes
     filter: (req, res) => {
         if (req.headers['x-no-compression']) {
-            // don't compress responses with this request header
             return false;
         }
-        // fallback to standard filter function
         return compression.filter(req, res);
     }
 }));
@@ -21,10 +19,10 @@ app.use(express.json());
 
 
 const database = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Admin24$$",
-    database: "personal_budget"
+    host: "sql5.freemysqlhosting.net",
+    user: "sql5669348",
+    password: "kJZd6tn69P",
+    database: "sql5669348"
 })
 
 
@@ -96,7 +94,7 @@ app.post('/create-budget', (req, res) => {
 app.get('/show-budget', async (req, res) => {
     const user_id = req.query.user_id;
     try {
-        // Fetch budget data from the budget table
+        
         const query = "SELECT * FROM budget WHERE user_id = ?";
         const budgetData = await database.promise().query(query,[user_id]);
         return res.json(budgetData[0]);
@@ -109,10 +107,9 @@ app.get('/show-budget', async (req, res) => {
 
 
 app.post('/add-expense', (req, res) => {
-    // const user_id = req.query.user_id;
     const {user_id,expense_category, amount, budgetid } = req.body;
 
-    // Fetch budget_id based on the expense_category
+    
     const getBudgetIdQuery = "SELECT id FROM budget WHERE budget_category = ? AND user_id =?";
     database.query(getBudgetIdQuery, [expense_category, user_id], (err, result) => {
         if (err) {
@@ -207,55 +204,6 @@ app.get('/category-wise-data', async (req, res) => {
     }
 });
 
-// app.get('/category-wise-data', async (req, res) => {
-//     try {
-//       const query = `
-//       SELECT 
-//         b.budget_category AS category, 
-//         SUM(b.amount) AS total_budget, 
-//         COALESCE(SUM(me.total_amount), 0) AS total_expense
-//       FROM 
-//         budget b
-//       LEFT JOIN 
-//         monthly_expense me ON b.id = me.budgetid
-//       GROUP BY 
-//         b.budget_category
-//       `;
-//       const data = await database.promise().query(query);
-  
-//       return res.json(data[0]);
-//     } catch (error) {
-//       console.error('Error fetching category-wise data:', error.message);
-//       return res.status(500).json({ error: "Error fetching category-wise data" });
-//     }
-//   });
-// app.get('/category-wise-data', async (req, res) => {
-//     try {
-//       const query = `
-//       SELECT 
-//       b.id AS budget_id, 
-//       b.budget_category AS category, 
-//       b.amount AS budget_amount, 
-//       COALESCE(SUM(me.total_amount), 0) AS expense_amount
-//     FROM budget b
-//   LEFT JOIN monthly_expense me 
-//       ON b.id = me.budget_id AND b.user_id = me.user_id
-//   GROUP BY 
-//       b.id, 
-//       b.budget_category, 
-//       b.amount
-
-//       `;
-//       // You would get the user_id from the request, e.g., req.params.user_id or req.query.user_id
-//       const userId = req.query.user_id; // or however you get the user's ID
-//       const data = await database.promise().query(query, [userId]);
-  
-//       return res.json(data[0]);
-//     } catch (error) {
-//       console.error('Error fetching category-wise data:', error.message);
-//       return res.status(500).json({ error: "Error fetching category-wise data" });
-//     }
-//   });
   
 
 app.get('/get-budget-id', async(req, res) => {

@@ -14,11 +14,11 @@ const NavBar = () => {
     display: "flex",
     margin: "0",
     padding: "10",
-    width: "50%", // Make the navbar span the entire width
+    width: "50%", 
   };
 
   const liStyle = {
-    flex: "0.5", // Distribute the space evenly among list items
+    flex: "0.5", 
     marginRight: "40px",
   };
 
@@ -36,9 +36,7 @@ const NavBar = () => {
     borderBottom: "2px solid #000000",
   };
 
-  // const isActive = (path) => {
-  //   return [path, "/"].includes(location.pathname);
-  // };
+  
 
   const isActive = (path) => {
     return path === location.pathname;

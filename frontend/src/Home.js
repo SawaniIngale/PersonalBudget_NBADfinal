@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-// import NavBar from "./Navbar";
 import { Chart } from "chart.js/auto";
 
 const gridContainerStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(2, 1fr)",
   gap: "20px",
   marginTop: "20px",
   width: "90%",
@@ -37,10 +36,7 @@ const Card = ({ title, children }) => {
   };
   
 
-// const gridItemStyle = {
-//   width: "100%",
-//   padding : "90px",
-// };
+
 
 function Home() {
     const [categoryWiseData, setCategoryWiseData] = useState([]);
@@ -87,13 +83,11 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    // Destroy existing charts before rendering new ones
     if (barChartRef.current) barChartRef.current.destroy();
     if (budgetPieChartRef.current) budgetPieChartRef.current.destroy();
     if (expensePieChartRef.current) expensePieChartRef.current.destroy();
     if (balancePieChartRef.current) balancePieChartRef.current.destroy();
 
-    // Render charts
     renderBarChart();
     renderBudgetPieChart();
     renderExpensePieChart();
@@ -168,26 +162,6 @@ function Home() {
     });
   };
 
-  // const renderBalancePieChart = () => {
-  //   const ctx = document.getElementById("balancePieChart");
-  //   balancePieChartRef.current = new Chart(ctx, {
-  //     type: "pie",
-  //     data: {
-  //       labels: ["Budget", "Expense", "Balance"],
-  //       datasets: [
-  //         {
-  //           data: [
-  //             totalBudgetExpense.totalBudget,
-  //             totalBudgetExpense.totalExpense,
-  //             Math.max(0, totalBudgetExpense.totalBudget - totalBudgetExpense.totalExpense),
-  //           ],
-  //           backgroundColor: ["#63D471", "#FF6384", "#36A2EB"],
-  //           hoverBackgroundColor: ["#63D471", "#FF6384", "#36A2EB"],
-  //         },
-  //       ],
-  //     },
-  //   });
-  // };
 
   const renderGaugeChart = () => {
     const ctx = document.getElementById("gaugeChart");

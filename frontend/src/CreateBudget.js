@@ -11,7 +11,6 @@ const CreateBudgetComponent = () => {
   const user_id = localStorage.getItem('user_id');
 
   useEffect(() => {
-    // Fetch budget data from the server when the component mounts
     const fetchBudgetData = async () => {
       try {
         const response = await axios.get(`http://localhost:8081/show-budget?user_id=${user_id}`);
@@ -22,7 +21,7 @@ const CreateBudgetComponent = () => {
     };
 
     fetchBudgetData();
-  }, []); // Run once on component mount
+  }, []); 
 
   const containerStyle = {
     display: 'flex',
@@ -77,29 +76,24 @@ const CreateBudgetComponent = () => {
 
 
   const handleCreateBudget = async() => {
-    // Validate input
     if (!budgetCategory || isNaN(amount) || amount <= 0) {
       alert('Please enter a valid budget category and amount.');
       return;
     }
 
     try {
-        // Make a POST request to add the expense
         const response = await axios.post('http://localhost:8081/create-budget', {
           budgetCategory,
           amount,
           user_id,
         });
 
-        // Update budgets array with the new budget
         const newBudget = { id: Date.now(), budget_category: budgetCategory, amount: parseFloat(amount) };
         setBudgets([...budgets, newBudget]);
 
-        // Clear form fields
         setBudgetCategory('');
         setAmount('');
     } catch (error) {
-        // Handle errors, e.g., show an error message to the user
         console.error('Error adding expense:', error.message);
       }  
 

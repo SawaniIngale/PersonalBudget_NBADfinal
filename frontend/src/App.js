@@ -8,7 +8,7 @@ import Home from './Home';
 import CreateBudget from './CreateBudget';
 import AddExpenses from './AddExpense';
 import Footer from './Footer';
-import InactivityModal from './InactivityModal'; // Import your modal component
+import InactivityModal from './InactivityModal'; 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,17 +22,17 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('jwt'); // Clear JWT on logout
+    localStorage.removeItem('jwt'); 
     setIsAuthenticated(false);
     setShouldLogout(true);
-    setShowModal(false); // Close the modal if open
+    setShowModal(false); 
     // navigate('/login');
   };
 
   let inactivityTimer;
   const resetInactivityTimer = () => {
     clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => setShowModal(true), 60000); // 1 minute of inactivity
+    inactivityTimer = setTimeout(() => setShowModal(true), 60000); 
   };
 
   const handleStayLoggedIn = () => {
@@ -59,7 +59,7 @@ function App() {
     let autoLogoutTimer;
 
     if (showModal) {
-      autoLogoutTimer = setTimeout(handleLogout, 20000); // 20 seconds
+      autoLogoutTimer = setTimeout(handleLogout, 20000); 
     }
 
     return () => clearTimeout(autoLogoutTimer);
